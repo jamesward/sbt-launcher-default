@@ -1,5 +1,5 @@
 language: bash
-script: cd tests; bash mac.sh
+script: cd tests; bash unix.sh
 os:
   - linux
   - osx
