@@ -1,0 +1,7 @@
+platform:
+  - x86
+
+before_test:
+  - cinst Cygwin
+test_script:
+  - cd tests & bash windows.sh & bash unix.sh
