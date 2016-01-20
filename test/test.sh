@@ -1,5 +1,11 @@
 #!/bin/bash
 
+realpath() {
+  echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+}
+
+SBT_EXEC=$(realpath $1)
+
 run_test() {
   local DIR=$1
   local CMD=$2
@@ -28,19 +34,15 @@ run_test() {
   fi
 }
 
-realpath() {
-  echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
-}
+run_test "with_default" "${SBT_EXEC}" "hello, world"
 
-run_test "with_default" "../../sbt" "hello, world"
+run_test "with_default" "${SBT_EXEC} shell" "> exit" "exit"
 
-run_test "with_default" "../../sbt shell" "> exit" "exit"
-
-run_test "with_default" "../../sbt foo" "Not a valid command: foo"
+run_test "with_default" "${SBT_EXEC} foo" "Not a valid command: foo"
 
 # run Mac tests
 if [[ "$(uname)" == "Darwin" ]]; then
   # simulate a non-interactive open by running this from the home dir
-  run_test "$HOME" "$(realpath ../sbt)" "Not a valid command: default"
-  run_test "$HOME" "$(realpath ../sbt)" "Set current project to sbt-launcher-default"
+  run_test "$HOME" "${SBT_EXEC}" "Not a valid command: default"
+  run_test "$HOME" "${SBT_EXEC}" "Set current project to sbt-launcher-default"
 fi

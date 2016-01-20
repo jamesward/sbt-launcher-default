@@ -7,4 +7,4 @@ before_test:
   - cinst Cygwin
 
 test_script:
-  - cd tests & bash windows.sh & bash unix.sh
+  - cd test & bash test.sh ../sbt.cmd & bash test.sh "bash ../sbt"
