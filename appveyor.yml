@@ -8,5 +8,5 @@ before_test:
 
 test_script:
   - cd test
-  - bash test.sh ../sbt
   - bash test.sh ../sbt.cmd
+  - bash test.sh ../sbt
