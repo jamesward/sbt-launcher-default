@@ -87,7 +87,7 @@ if "%JAVAOK%"=="false" (
 :run
 
 if "%~1"=="shell" (
-  CMDS=
+  set CMDS=
 ) else (
   if "%~1"=="" (
     set CMDS=default
