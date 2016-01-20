@@ -52,7 +52,10 @@ run_test() {
 
 run_test "with_default" "${SBT_EXEC}" "" "hello, world"
 
-run_test "with_default" "${SBT_EXEC}" "shell" "> exit" "exit"
+if [[ "$(uname)" != "Cygwin" ]]; then
+  # stdin doesn't seem to work as expected on windows / cygwin
+  run_test "with_default" "${SBT_EXEC}" "shell" "> exit" "exit"
+fi
 
 run_test "with_default" "${SBT_EXEC}" "foo" "Not a valid command: foo"
 
