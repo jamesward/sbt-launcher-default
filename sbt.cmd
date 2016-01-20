@@ -40,21 +40,41 @@ for /F %%j in ('"%_JAVACCMD%" -version 2^>^&1') do (
   if %%~j==javac set JAVACINSTALLED=1
 )
 
+@REM Check what Java version is being used
+for /f "tokens=3" %%g in ('java -version 2^>^&1 ^| findstr /i "version"') do (
+  set JAVA_VERSION=%%g
+)
+
+@REM Strips away the " characters
+set JAVA_VERSION=%JAVA_VERSION:"=%
+
+@REM Make sure Java 8 is installed
+for /f "delims=. tokens=1-3" %%v in ("%JAVA_VERSION%") do (
+  set MAJOR=%%v
+  set MINOR=%%w
+  set BUILD=%%x
+
+  if "!MINOR!" GEQ "8" (
+    set HASJAVA8=true
+  )
+)
+
 @REM BAT has no logical or, so we do it OLD SCHOOL! Oppan Redmond Style
 set JAVAOK=true
 if not defined JAVAINSTALLED set JAVAOK=false
 if not defined JAVACINSTALLED set JAVAOK=false
+if not defined HASJAVA8 set JAVAOK=false
 
 if "%JAVAOK%"=="false" (
   echo.
-  echo A Java JDK is not installed or can't be found.
+  echo A Java 8 JDK is not installed or can't be found.
   if not "%JAVA_HOME%"=="" (
     echo JAVA_HOME = "%JAVA_HOME%"
   )
   echo.
   echo Please go to
   echo   http://www.oracle.com/technetwork/java/javase/downloads/index.html
-  echo and download a valid Java JDK and install before running Activator.
+  echo and download a valid Java 8 JDK and install before running sbt.
   echo.
   echo If you think this message is in error, please check
   echo your environment variables to see if "java.exe" and "javac.exe" are
