@@ -30,7 +30,7 @@ run_test() {
     printf "Test passed!\n\n"
   else
     printf "Test failed!\n\n"
-    exit 1  
+    exit 1
   fi
 }
 

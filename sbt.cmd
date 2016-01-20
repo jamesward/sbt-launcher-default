@@ -84,8 +84,6 @@ if "%JAVAOK%"=="false" (
   exit /B 1
 )
 
-:run
-
 if "%~1"=="shell" (
   set CMDS=
 ) else (
@@ -100,8 +98,6 @@ set SBT_OPTS=-Xms512M -Xmx1024M -Xss1M -XX:MetaspaceSize=64M -XX:MaxMetaspaceSiz
 
 @REM Checks if the command contains spaces to know if it should be wrapped in quotes or not
 set NON_SPACED_CMD=%_JAVACMD: =%
-
-echo %_JAVACMD% %SBT_OPTS% -jar "%SBT_LAUNCH_JAR%" %CMDS%
 
 @REM Run sbt
 if "%_JAVACMD%"=="%NON_SPACED_CMD%" %_JAVACMD% %SBT_OPTS% -jar "%SBT_LAUNCH_JAR%" %CMDS%
