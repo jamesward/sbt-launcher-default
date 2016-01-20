@@ -4,7 +4,7 @@
 @echo off
 
 set ERROR_CODE=0
-set SBT_LAUNCH_JAR=sbt-launch.jar
+set SBT_LAUNCH_JAR="%~dp0%sbt-launch.jar"
 
 @REM Detect if we were double clicked, although theoretically A user could manually run cmd /c
 for %%x in (%cmdcmdline%) do if %%~x==/c set DOUBLECLICKED=1
