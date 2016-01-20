@@ -4,7 +4,7 @@
 @echo off
 
 set ERROR_CODE=0
-set SBT_LAUNCH_JAR="%~dp0%sbt-launch.jar"
+set SBT_LAUNCH_JAR=%~dp0%sbt-launch.jar
 
 @REM Detect if we were double clicked, although theoretically A user could manually run cmd /c
 for %%x in (%cmdcmdline%) do if %%~x==/c set DOUBLECLICKED=1
@@ -87,16 +87,16 @@ if "%JAVAOK%"=="false" (
 :run
 
 if "!args!"=="shell" (
-  CMDS=""
+  CMDS=
 ) else (
   if "!args!"=="" (
-    set CMDS="default"
+    set CMDS=default
   ) else (
     set CMDS=!args!
   )
 )
 
-set SBT_OPTS="-Xms512M -Xmx1024M -Xss1M -XX:MetaspaceSize=64M -XX:MaxMetaspaceSize=256M -XX:+CMSClassUnloadingEnabled"
+set SBT_OPTS=-Xms512M -Xmx1024M -Xss1M -XX:MetaspaceSize=64M -XX:MaxMetaspaceSize=256M -XX:+CMSClassUnloadingEnabled
 
 @REM Checks if the command contains spaces to know if it should be wrapped in quotes or not
 set NON_SPACED_CMD=%_JAVACMD: =%
