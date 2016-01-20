@@ -96,10 +96,12 @@ if "!args!"=="shell" (
   )
 )
 
-set SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled"
+set SBT_OPTS="-Xms512M -Xmx1024M -Xss1M -XX:+CMSClassUnloadingEnabled"
 
 @REM Checks if the command contains spaces to know if it should be wrapped in quotes or not
 set NON_SPACED_CMD=%_JAVACMD: =%
+
+@REM Run sbt
 if "%_JAVACMD%"=="%NON_SPACED_CMD%" %_JAVACMD% %SBT_OPTS% -jar "%SBT_LAUNCH_JAR%" %CMDS%
 if NOT "%_JAVACMD%"=="%NON_SPACED_CMD%" "%_JAVACMD%" %SBT_OPTS% -jar "%SBT_LAUNCH_JAR%" %CMDS%
 
