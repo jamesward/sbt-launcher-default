@@ -52,8 +52,6 @@ run_test() {
 
 run_test "with_default" "${SBT_EXEC}" "" "hello, world"
 
-echo $(uname)
-
 if [[ "$(uname)" != MSYS_NT* ]]; then
   # stdin doesn't seem to work as expected on windows / cygwin
   run_test "with_default" "${SBT_EXEC}" "shell" "> exit" "exit"
